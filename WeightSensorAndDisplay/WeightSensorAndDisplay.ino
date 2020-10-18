@@ -1,9 +1,9 @@
 #include "HX711.h"
 #include <ESP8266WiFi.h>;
-//#include <WiFiClient.h>;
 #include <ThingSpeak.h>;
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
