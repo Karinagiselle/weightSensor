@@ -13,11 +13,31 @@ float calibration_factor = 2300; // this calibration factor is adjusted accordin
 int units;
 float ounces;
 
+// WIFI connection
+const char* ssid     = "BT-R9A5QC";
+const char* password = "iT7MkGvYdvi7Nk";
+
 void setup() 
 {
   Serial.begin(115200);
   Wire.begin(D2, D1);
-    
+
+  // Connecting to a WiFi network
+  Serial.println();
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+   delay(500);
+  }
+
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+  Serial.println("Ready");
+  
   lcd.init();
   lcd.backlight();
   lcd.print("NodeMCU Wg Scale");
