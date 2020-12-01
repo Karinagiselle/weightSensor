@@ -1,13 +1,9 @@
-const Article = require('../models/model')
+const MongoDB = require('../models/model')
 
 exports.getArt = (req, res, next) => {
-    Article.fetchAll()
-    // .then(articles => {
-    //     res.render('index', { poner: articles});
-    // });
-    
+    MongoDB.fetchAll();   
 }
 
 exports.insert = (message, req, res, next) => {
-    Article.insert(message);
+    MongoDB.insert(message);
 }

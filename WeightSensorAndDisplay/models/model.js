@@ -1,24 +1,14 @@
 const getDb = require('../util/database').getDB;
-var myobj = { _id: "1", value: "40" };
 
-module.exports = class Article {
-    // constructor(title, content) {
-    //     this.title = title;
-    //     this.content = content;
-    // }
-
-    //  save() {
-    //      articles.push(this);
-    //  }
-
+module.exports = class MongoDB {
     static fetchAll() {
         const db = getDb();
         return db.collection('Arduino')
         .find()
          .toArray()
-        .then(articles => {
-            console.log(articles);
-            return articles;
+        .then(value => {
+            console.log(value);
+            return value;
         })
         .catch(err => {
             console.log(err);
