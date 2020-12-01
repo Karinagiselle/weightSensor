@@ -25,7 +25,8 @@ module.exports = class Article {
         });
      }
 
-     static insert() {
+     static insert(message) {
+        var myobj = { _id: Date.now(), value: message };
         const db = getDb();
         return db.collection('Arduino')
         .insert(myobj)

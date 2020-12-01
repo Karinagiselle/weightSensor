@@ -8,6 +8,6 @@ exports.getArt = (req, res, next) => {
     
 }
 
-exports.insert = (req, res, next) => {
-    Article.insert();
+exports.insert = (message, req, res, next) => {
+    Article.insert(message);
 }
