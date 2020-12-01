@@ -1,9 +1,9 @@
 #include "HX711.h"
 #include <ESP8266WiFi.h>;
-#include <ThingSpeak.h>;
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -16,6 +16,11 @@ float ounces;
 // WIFI connection
 const char* ssid     = "BT-R9A5QC";
 const char* password = "iT7MkGvYdvi7Nk";
+const char *mqttServer = "192.168.1.172"; //Use your local IP not 127.0.0.1 or localhost
+const int mqttPort = 1883;
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 void setup() 
 {
@@ -31,12 +36,16 @@ void setup()
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
    delay(500);
+   Serial.print(".");
   }
 
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   Serial.println("Ready");
+
+  client.setServer(mqttServer, mqttPort);
+//  client.setCallback(callback);
   
   lcd.init();
   lcd.backlight();
@@ -50,12 +59,28 @@ void setup()
   Serial.print("Zero factor: "); //This can be used to remove the need to tare the scale. Useful in permanent scale projects.
   Serial.println(zero_factor);
 
+  while (!client.connected()) {
+    Serial.println("Connecting to MQTT...");
+    WiFi.mode(WIFI_STA);
+    if (client.connect("ESP8266Client" )) {
+ 
+      Serial.println("connected");  
+ 
+    } else {
+ 
+      Serial.print("failed with state ");
+      Serial.print(client.state());
+      delay(2000);
+ 
+    }
+  }
+
 }
 
 void loop() 
 
 {
-
+  client.loop();
   scale.set_scale(calibration_factor); //Adjust to this calibration factor
 
   Serial.print("Reading: ");
@@ -92,5 +117,12 @@ void loop()
        Serial.print(calibration_factor);
        Serial.println();
        delay(1000);
-  } 
+  }
+
+  Serial.println("Sending data to topic...");
+  String unitsString = String(units);
+  char unitsToSend[unitsString.length() + 1];
+  unitsString.toCharArray(unitsToSend, unitsString.length() + 1);
+
+  client.publish("esp/welcome", unitsToSend);
 }
