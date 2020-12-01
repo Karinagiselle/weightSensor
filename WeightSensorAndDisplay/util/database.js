@@ -1,10 +1,10 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
-
+var mongoDBURI = '' //here the mongoDBURI
 let _db;
 
 const mongoConnect = callback => {
-    MongoClient.connect('mongodb+srv://admin:admin@weightsensor.fxtta.mongodb.net/TestDB?retryWrites=true&w=majority')
+    MongoClient.connect(mongoDBURI)
     .then(client => {
         console.log('Connected');
         _db = client.db();
