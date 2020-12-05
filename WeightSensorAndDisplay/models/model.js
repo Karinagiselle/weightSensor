@@ -19,7 +19,7 @@ module.exports = class MongoDB {
         var myobj = { _id: Date.now(), value: message };
         const db = getDb();
         return db.collection('Arduino')
-        .insert(myobj)
+        .insertOne(myobj)
         .catch(err => {
             console.log(err);
         });

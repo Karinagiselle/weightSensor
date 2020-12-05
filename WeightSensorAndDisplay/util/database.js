@@ -4,9 +4,9 @@ var mongoDBURI = '' //here the mongoDBURI
 let _db;
 
 const mongoConnect = callback => {
-    MongoClient.connect(mongoDBURI)
+    MongoClient.connect(mongoDBURI, {useUnifiedTopology: true})
     .then(client => {
-        console.log('Connected');
+        console.log('Connected to DB');
         _db = client.db();
         callback();
     })
