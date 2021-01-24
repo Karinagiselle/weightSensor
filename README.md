@@ -3,17 +3,14 @@ This project is measuring weight and sending the data to a time series data base
 
 # Requirements
  Database - I'm using MongoDB Atlas
-<<<<<<< HEAD
 
  MQTTLens installed and configured
 
  Working Arduino
 
-=======
  MQTTLens installed and configured
+
  Working Arduino
->>>>>>> 3d41b694073bee4ff0de26440fab31501dee9816
- Subscriber that will read from the local topic and will send data to the DB
 
 # MQTTLens configuration
 1. Install MQTTLens as an extension for Chrome.
