@@ -15,6 +15,7 @@ This project is measuring weight and sending the data to a time series data base
 1. Install MQTTLens as an extension for Chrome.
 2. Create a new connection
      a.Hostname = 127.0.0.1
+     
      b.Port = 1883
 3. Create a subscriber
      a.Topic name = esp/welcome
