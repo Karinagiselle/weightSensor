@@ -1,13 +1,26 @@
 # weightSensor
 This project is measuring weight and sending the data to a time series data base.
 
-# Test locally MQTT subscriber and publisher
-## Description
-*BROKER URI: * mqtt://test.mosquitto.org
-*TOPIC: * demo/device/
+# Requirements
+## Database - I'm using MongoDB Atlas
+## MQTTLens installed and configured
+## Working Arduino
+## Subscriber that will read from the local topic and will send data to the DB
 
-The MQTT publisher sends the message passed in the paremeter to the topic and then exits while MQTT subscriber keeps reading from the topic and log the message received.
+# MQTTLens configuration
+1. Install MQTTLens as an extension for Chrome.
+2. Create a new connection
+#a.Hostname = 127.0.0.1
+#b.Port = 1883
+3. Create a subscriber
+#a.Topic name = esp/welcome
+
+
+#Project configuration
+In util/database.js is set the MongoDB URI.
+In app.js is set the topic name.
 
 ## How to test it
-In one terminal run the subscriber with the command: node mqttSubscriber.js
-In a different terminal run the publisher and pass as a parameter the message with the command: node mqttPublisher.js <message>
+Once you have the MQTT broker up and the topic created, you need to run in one terminal the subscriber with the command: node app.js
+Which will read from the topic and send the data to the DB.
+
