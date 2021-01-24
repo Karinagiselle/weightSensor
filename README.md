@@ -19,6 +19,7 @@ This project is measuring weight and sending the data to a time series data base
      
      b.Port = 1883
 3. Create a subscriber
+
      a.Topic name = esp/welcome
 
 
