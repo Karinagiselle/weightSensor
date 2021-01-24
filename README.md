@@ -22,6 +22,7 @@ This project is measuring weight and sending the data to a time series data base
 
 # Project configuration
 In util/database.js is set the MongoDB URI.
+
 In app.js is set the topic name.
 
 # How to test it
